@@ -10,7 +10,7 @@ Resources:
           title: !Sub ${AWS::StackName}-HttpApi
           version: '1.0'
         paths:
-          $default:
+          /$default:
             x-amazon-apigateway-any-method:
               responses: {}
               isDefaultRoute: true
@@ -32,19 +32,19 @@ Resources:
         - AWSXrayWriteOnlyAccess
         - DynamoDBCrudPolicy:
             TableName: !Ref Users
-      Events:
-        HttpApiANYdefault:
-          Type: HttpApi
-          Properties:
-            Path: $default
-            Method: ANY
-            ApiId: !Ref HttpApi
-            PayloadFormatVersion: '2.0'
-            TimeoutInMillis: 29000
       Environment:
         Variables:
           TABLE_NAME: !Ref Users
           TABLE_ARN: !GetAtt Users.Arn
+      Events:
+        HttpApiANYdefault:
+          Type: HttpApi
+          Properties:
+            Path: /$default
+            Method: ANY
+            ApiId: !Ref HttpApi
+            PayloadFormatVersion: '2.0'
+            TimeoutInMillis: 29000
   Users:
     Type: AWS::DynamoDB::Table
     Properties:
