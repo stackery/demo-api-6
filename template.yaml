@@ -10,9 +10,10 @@ Resources:
           title: !Sub ${AWS::StackName}-HttpApi
           version: '1.0'
         paths:
-          /{proxy+}:
+          /$default:
             x-amazon-apigateway-any-method:
               responses: {}
+              isDefaultRoute: true
       FailOnWarnings: true
   Api:
     Type: AWS::Serverless::Function
@@ -36,10 +37,10 @@ Resources:
           TABLE_NAME: !Ref Users
           TABLE_ARN: !GetAtt Users.Arn
       Events:
-        HttpApiANYproxy:
+        HttpApiANYdefault:
           Type: HttpApi
           Properties:
-            Path: /{proxy+}
+            Path: /$default
             Method: ANY
             ApiId: !Ref HttpApi
             PayloadFormatVersion: '2.0'
