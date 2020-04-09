@@ -45,6 +45,8 @@ Resources:
             ApiId: !Ref HttpApi
             PayloadFormatVersion: '2.0'
             TimeoutInMillis: 29000
+    Metadata:
+      RuntimeOption: typescript
   Users:
     Type: AWS::DynamoDB::Table
     Properties:
