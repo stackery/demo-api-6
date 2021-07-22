@@ -11,4 +11,4 @@ Here is an overview of the files:
 ├── .stackery-config.yaml              <-- Default CLI parameters for root directory
 ├── README.md                          <-- This README file
 └── template.yaml                      <-- SAM infrastructure-as-code template
-```
+``` 
